@@ -1,5 +1,6 @@
 import 'package:chat_app/screens/login_screen.dart';
 import 'package:chat_app/screens/registration_screen.dart';
+import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -12,22 +13,31 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenState extends State<WelcomeScreen>
     with SingleTickerProviderStateMixin {
-  late AnimationController animationController;
+
+  late AnimationController controller;
+  late Animation animation;
 
   @override
   void initState() {
     super.initState();
-    animationController = AnimationController(
+    
+    controller = AnimationController(
       duration: const Duration(
         seconds: 1,
       ),
-      vsync: this,
-      upperBound: 100,
+      vsync: this ,
     );
-    animationController.forward();
-    animationController.addListener(() {
+
+    animation = CurvedAnimation(
+      parent: controller,
+      curve: Curves.easeIn,
+      reverseCurve: Curves.decelerate,
+    );
+
+    controller.reverse(from: 1.0);
+    controller.addListener(() {
       setState(() {});
-      print(animationController.value);
+      print(animation.value);
     });
   }
 
@@ -46,7 +56,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                 Hero(
                   tag: "logo",
                   child: SizedBox(
-                    height: animationController.value,
+                    height: animation.value * 100 ,
                     child: Image.asset('assets/images/logo.png'),
                   ),
                 ),
