@@ -22,29 +22,36 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     super.initState();
     
     controller = AnimationController(
-      duration: const Duration(
-        seconds: 1,
-      ),
-      vsync: this ,
-    );
+      duration: const Duration(seconds: 1),vsync: this);
 
-    animation = CurvedAnimation(
-      parent: controller,
-      curve: Curves.easeIn,
-      reverseCurve: Curves.decelerate,
-    );
-
-    controller.reverse(from: 1.0);
+    animation = ColorTween(begin: Colors.blueGrey, end: Colors.white).animate(controller);
+    // animation = CurvedAnimation(
+    //   parent: controller,
+    //   curve: Curves.easeIn,
+    //   reverseCurve: Curves.decelerate,
+    // );
+    controller.forward();
+    // animation.addStatusListener((status) {
+    //   if(status == AnimationStatus.completed){
+    //     controller.reverse(from: 1);
+    //   }else if(status == AnimationStatus.dismissed){
+    //     controller.forward();
+    //   }
+    // });
     controller.addListener(() {
       setState(() {});
-      print(animation.value);
     });
   }
 
   @override
+  void dispose(){
+    controller.dispose();
+    super.dispose();
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: animation.value,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
@@ -56,21 +63,21 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                 Hero(
                   tag: "logo",
                   child: SizedBox(
-                    height: animation.value * 100 ,
+                    height: 85,
                     child: Image.asset('assets/images/logo.png'),
                   ),
                 ),
                 const Text(
                   'Chatty App',
                   style: TextStyle(
-                      fontSize: 45.0,
+                      fontSize: 40.0,
                       fontWeight: FontWeight.w900,
                       color: Colors.black),
                 ),
               ],
             ),
             const SizedBox(
-              height: 48.0,
+              height: 30.0,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
