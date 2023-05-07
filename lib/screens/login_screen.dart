@@ -44,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   //Do something with the user input.
                 },
                 decoration: kTextFieldDecoration.copyWith(
-                    hintText: "Enter your password")),
+                    hintText: "Enter your password.")),
             const SizedBox(
               height: 24.0,
             ),

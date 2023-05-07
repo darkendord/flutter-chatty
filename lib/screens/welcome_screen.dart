@@ -123,7 +123,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
           minWidth: 200.0,
           height: 42.0,
           child: const Text(
-            'Log In',
+            'Log In.',
             style: TextStyle(color: Colors.white),
           ),
         ),
