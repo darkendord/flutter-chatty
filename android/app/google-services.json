@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "132826475569",
+    "project_id": "chatty-app-b062f",
+    "storage_bucket": "chatty-app-b062f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:132826475569:android:1e4ace68c442543618f910",
+        "android_client_info": {
+          "package_name": "com.example.chat_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "132826475569-b4aj7vrq7qfjrd5ja9qganql8mo1u1gt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJhp3oeV4Xue1Lmng184ycfn63mPgFT_k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "132826475569-b4aj7vrq7qfjrd5ja9qganql8mo1u1gt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:132826475569:android:3587693dbae7f3e118f910",
+        "android_client_info": {
+          "package_name": "net.chattlite.chat_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "132826475569-b4aj7vrq7qfjrd5ja9qganql8mo1u1gt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJhp3oeV4Xue1Lmng184ycfn63mPgFT_k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "132826475569-b4aj7vrq7qfjrd5ja9qganql8mo1u1gt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
