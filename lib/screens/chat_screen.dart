@@ -5,6 +5,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+User? loggedInUser;
+
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -16,7 +18,6 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   final messageTextController = TextEditingController();
-  User? loggedInUser;
   String? messageText;
   @override
   void initState() {
@@ -123,15 +124,18 @@ Widget _messageStream() {
         print(snapshot.error);
         return const Text("Something went wrong");
       } else if (snapshot.hasData) {
-        final messages = snapshot.data?.docs;
+        final messages = snapshot.data?.docs.reversed;
 
         for (var message in messages!) {
           final messageText = message.data()["text"];
           final messageSender = message.data()["sender"];
 
+          final currentUser = loggedInUser?.email;
+
           final messageBuble = MessageBuble(
             sender: messageSender,
             text: messageText,
+            isCurrentUser: currentUser == messageSender
           );
 
           messageBubles.add(messageBuble);
@@ -145,6 +149,7 @@ Widget _messageStream() {
         case ConnectionState.active:
           return Expanded(
             child: ListView.builder(
+              reverse: true,
               padding: const EdgeInsets.symmetric(
                 horizontal: 10,
                 vertical: 10,
@@ -158,6 +163,7 @@ Widget _messageStream() {
         case ConnectionState.done:
           return Expanded(
             child: ListView.builder(
+              reverse: true,
               padding: const EdgeInsets.symmetric(
                 horizontal: 10,
                 vertical: 10,
@@ -174,33 +180,43 @@ Widget _messageStream() {
 }
 
 class MessageBuble extends StatelessWidget {
-  const MessageBuble({Key? key, required this.sender, required this.text})
+  const MessageBuble({Key? key, required this.sender, required this.text, required this.isCurrentUser})
       : super(key: key);
 
   final String sender;
   final String text;
+  final bool isCurrentUser;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(10),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: isCurrentUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
           Text(
             sender,
             style: const TextStyle(fontSize: 12, color: Colors.black54),
           ),
           Material(
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: isCurrentUser
+                ? const BorderRadius.only(
+                topLeft: Radius.circular(30),
+                bottomLeft: Radius.circular(30),
+                bottomRight: Radius.circular(30),
+               ): const BorderRadius.only(
+              topRight: Radius.circular(30),
+              bottomRight: Radius.circular(30),
+              bottomLeft: Radius.circular(30),
+            ),
             elevation: 5,
-            color: Colors.lightBlueAccent,
+            color: isCurrentUser ? Colors.lightBlueAccent : Colors.white,
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               child: Text(
-                "$text from $sender",
-                style: const TextStyle(
-                  color: Colors.white,
+                text,
+                style: TextStyle(
+                  color: isCurrentUser ? Colors.white : Colors.black54,
                   fontSize: 15,
                 ),
               ),
