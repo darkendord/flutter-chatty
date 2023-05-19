@@ -1,3 +1,4 @@
+import 'package:chat_app/modules/comments/view/comments_page.dart';
 import 'package:chat_app/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/constants.dart';
@@ -110,7 +111,7 @@ Padding _loginButton(context, String email, String password, Function spinner,
             final user = await _auth.signInWithEmailAndPassword(
                 email: email, password: password);
             if (user != null) {
-              Navigator.pushNamed(context, ChatScreen.id);
+              Navigator.pushNamed(context, CommentsPage.id);
             }
             resetFields();
             spinner();

@@ -7,7 +7,6 @@ final FirebaseAuth _auth = FirebaseAuth.instance;
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 User? loggedInUser;
 
-
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
   static String id = "chat_screen.";
@@ -35,21 +34,6 @@ class _ChatScreenState extends State<ChatScreen> {
       print(e);
     }
   }
-
-  // void getMessages() async {
-  //   final messages = await _firestore.collection("messages").get();
-  //   for (var message in messages.docs) {
-  //     print(message.data());
-  //   }
-  // }
-
-  // void messagesStream() async {
-  //   await for (var snapshot in _firestore.collection("messages").snapshots()) {
-  //     for (var message in snapshot.docs) {
-  //       print(message.data());
-  //     }
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -133,10 +117,9 @@ Widget _messageStream() {
           final currentUser = loggedInUser?.email;
 
           final messageBuble = MessageBuble(
-            sender: messageSender,
-            text: messageText,
-            isCurrentUser: currentUser == messageSender
-          );
+              sender: messageSender,
+              text: messageText,
+              isCurrentUser: currentUser == messageSender);
 
           messageBubles.add(messageBuble);
         }
@@ -180,7 +163,11 @@ Widget _messageStream() {
 }
 
 class MessageBuble extends StatelessWidget {
-  const MessageBuble({Key? key, required this.sender, required this.text, required this.isCurrentUser})
+  const MessageBuble(
+      {Key? key,
+      required this.sender,
+      required this.text,
+      required this.isCurrentUser})
       : super(key: key);
 
   final String sender;
@@ -192,7 +179,8 @@ class MessageBuble extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(10),
       child: Column(
-        crossAxisAlignment: isCurrentUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+        crossAxisAlignment:
+            isCurrentUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
           Text(
             sender,
@@ -201,14 +189,15 @@ class MessageBuble extends StatelessWidget {
           Material(
             borderRadius: isCurrentUser
                 ? const BorderRadius.only(
-                topLeft: Radius.circular(30),
-                bottomLeft: Radius.circular(30),
-                bottomRight: Radius.circular(30),
-               ): const BorderRadius.only(
-              topRight: Radius.circular(30),
-              bottomRight: Radius.circular(30),
-              bottomLeft: Radius.circular(30),
-            ),
+                    topLeft: Radius.circular(30),
+                    bottomLeft: Radius.circular(30),
+                    bottomRight: Radius.circular(30),
+                  )
+                : const BorderRadius.only(
+                    topRight: Radius.circular(30),
+                    bottomRight: Radius.circular(30),
+                    bottomLeft: Radius.circular(30),
+                  ),
             elevation: 5,
             color: isCurrentUser ? Colors.lightBlueAccent : Colors.white,
             child: Padding(
@@ -227,3 +216,20 @@ class MessageBuble extends StatelessWidget {
     );
   }
 }
+
+/*
+// void getMessages() async {
+  //   final messages = await _firestore.collection("messages").get();
+  //   for (var message in messages.docs) {
+  //     print(message.data());
+  //   }
+  // }
+
+  // void messagesStream() async {
+  //   await for (var snapshot in _firestore.collection("messages").snapshots()) {
+  //     for (var message in snapshot.docs) {
+  //       print(message.data());
+  //     }
+  //   }
+  // }
+ */
