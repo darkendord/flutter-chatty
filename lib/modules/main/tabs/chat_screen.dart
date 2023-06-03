@@ -38,21 +38,6 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: null,
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.close),
-            onPressed: () {
-              // messagesStream();
-              _auth.signOut();
-              Navigator.pop(context);
-            },
-          ),
-        ],
-        title: const Text('⚡️Chat'),
-        backgroundColor: Colors.lightBlueAccent,
-      ),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

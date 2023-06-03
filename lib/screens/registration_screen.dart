@@ -1,4 +1,4 @@
-import 'package:chat_app/screens/chat_screen.dart';
+import 'package:chat_app/modules/main/tabs/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';

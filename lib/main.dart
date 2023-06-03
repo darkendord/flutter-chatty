@@ -1,10 +1,11 @@
+import 'package:chat_app/modules/main/view/main.dart';
 import 'package:chat_app/screens/welcome_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/screens/welcome_screen.dart';
 import 'package:chat_app/screens/login_screen.dart';
 import 'package:chat_app/screens/registration_screen.dart';
-import 'package:chat_app/screens/chat_screen.dart';
+import 'package:chat_app/modules/main/tabs/chat_screen.dart';
 import 'modules/comments/view/comments_page.dart';
 
 import 'firebase_options.dart';
@@ -26,6 +27,7 @@ class FlashChat extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: WelcomeScreen.id,
       routes: {
+        MainScreen.id: (context) => const MainScreen(),
         WelcomeScreen.id: (context) => const WelcomeScreen(),
         LoginScreen.id: (context) => const LoginScreen(),
         RegistrationScreen.id: (context) => const RegistrationScreen(),

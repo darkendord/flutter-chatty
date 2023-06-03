@@ -1,10 +1,12 @@
 import 'package:chat_app/modules/comments/view/comments_page.dart';
-import 'package:chat_app/screens/chat_screen.dart';
+import 'package:chat_app/modules/main/tabs/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+
+import '../modules/main/view/main.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -111,7 +113,7 @@ Padding _loginButton(context, String email, String password, Function spinner,
             final user = await _auth.signInWithEmailAndPassword(
                 email: email, password: password);
             if (user != null) {
-              Navigator.pushNamed(context, CommentsPage.id);
+              Navigator.pushNamed(context, MainScreen.id);
             }
             resetFields();
             spinner();
