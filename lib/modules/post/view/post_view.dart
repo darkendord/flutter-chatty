@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../../models/article_model.dart';
+import '../../../models/post_model.dart';
 
 class ArticleView extends StatefulWidget {
   const ArticleView({Key? key, required this.articleModel}) : super(key: key);
